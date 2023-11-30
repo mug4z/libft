@@ -17,10 +17,12 @@ SRC = ft_isalnum.c  ft_isalpha.c ft_isdigit.c ft_isprint.c ft_isascii.c ft_strle
 	  ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putnbr_fd.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c  \
 	  ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 	  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-
 FT_PRINTFSRC =  ft_printf/ft_char_convertion.c ft_printf/ft_convert_hex.c ft_printf/ft_digit_convertion.c ft_printf/ft_printf.c
+GNLSRC = gnl/get_next_line.c gnl/get_next_line_utils.c
+
 OBJ = $(patsubst %.c,%.o,$(SRC))
-FT_PRINTFSRC_OBJ = $(patsubst %.c,%.o,$(FT_PRINTFSRC))
+FT_PRINTF_OBJ = $(patsubst %.c,%.o,$(FT_PRINTFSRC))
+GNL_OBJ = $(patsubst %.c,%.o,$(GNLSRC))
 
 
 NAME = libft.a
@@ -37,11 +39,12 @@ RM = /bin/rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(FT_PRINTFSRC_OBJ)
-	ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTFSRC_OBJ)
+$(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
+	ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
 clean:
 	 $(RM) $(wildcard $(OBJ))
-	 $(RM) $(wildcard $(FT_PRINTFSRC_OBJ))
+	 $(RM) $(wildcard $(FT_PRINTF_OBJ))
+	 $(RM) $(wildcard $(GNL_OBJ))
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(LIBFILE)
