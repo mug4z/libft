@@ -37,9 +37,6 @@ RM = /bin/rm -rf
 
 all: $(NAME)
 
-bonus:$(BOBJ)
-	ar -rsc $(LIBFILE) $(BOBJ)
-
 $(NAME): $(OBJ)
 	ar -rsc $(LIBFILE) $(OBJ)
 clean:
