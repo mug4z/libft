@@ -1,3 +1,8 @@
-test*
-*.o
-*.a
+*.dSYM
+*.swp
+*test*.c
+*.out
+.DS_Store
+.idea
+.*.c
+.vscode
