@@ -6,7 +6,7 @@
 #    By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:19:16 by tfrily            #+#    #+#              #
-#    Updated: 2023/11/29 13:37:25 by tfrily           ###   ########.fr        #
+#    Updated: 2023/12/08 16:44:50 by tfrily           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBPATH = .
 LIBFILE = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = /bin/rm -rf
 
 
