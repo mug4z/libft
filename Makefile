@@ -6,7 +6,7 @@
 #    By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:19:16 by tfrily            #+#    #+#              #
-#    Updated: 2024/02/06 14:45:32 by tfrily           ###   ########.fr        #
+#    Updated: 2024/02/06 15:07:34 by tfrily           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,9 @@ clean:
 	 @$(RM) $(OBJDIR)
 	 @$(RM) $(wildcard $(FT_PRINTF_OBJ))
 	 @$(RM) $(wildcard $(GNL_OBJ))
-	 @echo "\033[32m 🧹Clean done 🧹"
+	 @echo "\033[32m 🧹Clean libft done 🧹"
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFILE)
-	@echo "\033[32m 🧹FClean done 🧹"
+	@echo "\033[32m 🧹FClean libft done 🧹"
 re: fclean all
