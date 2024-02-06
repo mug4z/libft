@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfrily <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:23:44 by tfrily            #+#    #+#             */
-/*   Updated: 2023/10/27 13:35:26 by tfrily           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:22:02 by tfrily           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	nbr_elements(char const *str, char sep)

@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_clean2dtable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 11:58:34 by tfrily            #+#    #+#             */
-/*   Updated: 2024/01/30 12:31:07 by tfrily           ###   ########.fr       */
+/*   Created: 2024/02/06 10:29:06 by tfrily            #+#    #+#             */
+/*   Updated: 2024/02/06 10:29:27 by tfrily           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/**
+ * @brief Free all the element of a 2d array.
+ *
+ * @param ptr The 2d table
+ * @return int 0
+ */
+int	ft_clean2dtable(char **ptr)
 {
-	char	*memory;
-	size_t	len_str;
+	int	x;
 
-	len_str = ft_strlen(s);
-	if (!s)
-		return (memory = NULL);
-	if (start > len_str)
-		return (ft_strdup(""));
-	if (len > (len_str + start))
-		len = ft_strlen(s + start);
-	memory = ft_calloc(len + 1, sizeof(char));
-	if (memory == NULL)
-		return (memory = NULL);
-	ft_strlcpy(memory, &s[start], len + 1);
-	return (memory);
+	x = 0;
+	while (ptr[x])
+	{
+		free (ptr[x]);
+		ptr[x] = NULL;
+		x++;
+	}
+	free (ptr);
+	ptr = NULL;
+	return (0);
 }

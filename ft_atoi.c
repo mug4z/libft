@@ -6,9 +6,10 @@
 /*   By: tfrily <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:44:49 by tfrily            #+#    #+#             */
-/*   Updated: 2023/10/18 14:44:51 by tfrily           ###   ########.fr       */
+/*   Updated: 2024/02/02 16:48:03 by tfrily           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static	int	ft_isspace(int c)
@@ -19,10 +20,10 @@ static	int	ft_isspace(int c)
 		return (0);
 }
 
-long ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int		i;
-	long 	res;
+	long	res;
 	int		sgned;
 
 	i = 0;

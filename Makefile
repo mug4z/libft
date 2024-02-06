@@ -6,7 +6,7 @@
 #    By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:19:16 by tfrily            #+#    #+#              #
-#    Updated: 2023/12/08 16:44:50 by tfrily           ###   ########.fr        #
+#    Updated: 2024/02/06 12:04:28 by tfrily           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = ft_isalnum.c  ft_isalpha.c ft_isdigit.c ft_isprint.c ft_isascii.c ft_strle
 	  ft_atoi.c ft_strdup.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_substr.c ft_strjoin.c \
 	  ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putnbr_fd.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c  \
 	  ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-	  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+	  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_clean.c ft_clean2dtable.c
 FT_PRINTFSRC =  ft_printf/ft_char_convertion.c ft_printf/ft_convert_hex.c ft_printf/ft_digit_convertion.c ft_printf/ft_printf.c
 GNLSRC = gnl/get_next_line.c gnl/get_next_line_utils.c
 
@@ -31,21 +31,28 @@ LIBPATH = .
 LIBFILE = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra #-g
 RM = /bin/rm -rf
+
+GREEN = "\033[32m"
 
 
 .PHONY: all clean fclean re bonus
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
-	ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $^ -o $@
+	
+$(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ) 
+	@ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
+	@echo "\033[32m 💎Compilation done💎"
 clean:
-	 $(RM) $(wildcard $(OBJ))
-	 $(RM) $(wildcard $(FT_PRINTF_OBJ))
-	 $(RM) $(wildcard $(GNL_OBJ))
+	 @$(RM) $(wildcard $(OBJ))
+	 @$(RM) $(wildcard $(FT_PRINTF_OBJ))
+	 @$(RM) $(wildcard $(GNL_OBJ))
+	 @echo "\033[32m Clean done"
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(LIBFILE)
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFILE)
 re: fclean all
