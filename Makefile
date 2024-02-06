@@ -6,7 +6,7 @@
 #    By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:19:16 by tfrily            #+#    #+#              #
-#    Updated: 2024/02/06 12:04:28 by tfrily           ###   ########.fr        #
+#    Updated: 2024/02/06 12:07:28 by tfrily           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ all: $(NAME)
 	
 $(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ) 
 	@ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
-	@echo "\033[32m 💎Compilation done💎"
+	@echo "\033[32m 💎Compilation libft done💎"
 clean:
 	 @$(RM) $(wildcard $(OBJ))
 	 @$(RM) $(wildcard $(FT_PRINTF_OBJ))
