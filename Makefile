@@ -6,7 +6,7 @@
 #    By: tfrily <tfrily@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:19:16 by tfrily            #+#    #+#              #
-#    Updated: 2024/02/06 12:07:28 by tfrily           ###   ########.fr        #
+#    Updated: 2024/02/06 14:45:32 by tfrily           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,30 +29,33 @@ NAME = libft.a
 LIBNAME = ft
 LIBPATH = .
 LIBFILE = libft.a
-
+OBJDIR = object
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-g
 RM = /bin/rm -rf
 
 GREEN = "\033[32m"
 
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re makedir
 
 all: $(NAME)
 
 %.o : %.c
-	@$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 	
 $(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ) 
 	@ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
+	@#@mkdir -p $(OBJDIR)
+	@#@mv $(OBJ) $(OBJDIR) 
 	@echo "\033[32m 💎Compilation libft done💎"
 clean:
 	 @$(RM) $(wildcard $(OBJ))
+	 @$(RM) $(OBJDIR)
 	 @$(RM) $(wildcard $(FT_PRINTF_OBJ))
 	 @$(RM) $(wildcard $(GNL_OBJ))
-	 @echo "\033[32m Clean done"
+	 @echo "\033[32m 🧹Clean done 🧹"
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFILE)
+	@echo "\033[32m 🧹FClean done 🧹"
 re: fclean all
