@@ -10,52 +10,84 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_isalnum.c  ft_isalpha.c ft_isdigit.c ft_isprint.c ft_isascii.c ft_strlen.c \
-	  ft_memset.c ft_bzero.c ft_memcpy.c ft_calloc.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c \
-	  ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-	  ft_atoi.c ft_strdup.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_substr.c ft_strjoin.c \
-	  ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putnbr_fd.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c  \
-	  ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-	  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_clean.c ft_clean2dtable.c
-FT_PRINTFSRC =  ft_printf/ft_char_convertion.c ft_printf/ft_convert_hex.c ft_printf/ft_digit_convertion.c ft_printf/ft_printf.c
-GNLSRC = gnl/get_next_line.c gnl/get_next_line_utils.c
+NAME		=	libft.a
+INC_DIR		=	inc/
+SRC_DIR		=	src/
+OBJ_DIR		=	obj/
+SRC_SUBDIRS  =   ft_printf gnl libft
+DEP_DIR		=	$(OBJ_DIR)dep/
+LIBFT_DIR	=	$(SRC_DIR)/libft/
+PRINTF_DIR	=	$(SRC_DIR)/ft_printf/
+GNL_DIR		=	$(SRC_DIR)/gnl/
 
-OBJ = $(patsubst %.c,%.o,$(SRC))
-FT_PRINTF_OBJ = $(patsubst %.c,%.o,$(FT_PRINTFSRC))
-GNL_OBJ = $(patsubst %.c,%.o,$(GNLSRC))
+SRC			= ft_isalnum  ft_isalpha ft_isdigit ft_isprint ft_isascii ft_strlen \
+			  ft_memset ft_bzero ft_memcpy ft_calloc ft_memmove ft_strlcpy ft_strlcat ft_toupper \
+			  ft_tolower ft_strchr ft_strrchr ft_strncmp ft_memchr ft_memcmp ft_strnstr \
+			  ft_atoi ft_strdup ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_substr ft_strjoin \
+			  ft_strtrim ft_split ft_itoa ft_strmapi ft_striteri ft_putnbr_fd ft_lstnew_bonus ft_lstadd_front_bonus  \
+			  ft_lstsize_bonus ft_lstlast_bonus ft_lstadd_back_bonus ft_lstdelone_bonus \
+			  ft_lstclear_bonus ft_lstiter_bonus ft_lstmap_bonus ft_clean ft_clean2dtable
 
+FT_PRINTFSRC	=  ft_char_convertion ft_convert_hex ft_digit_convertion ft_printf
 
-NAME = libft.a
+GNLSRC = get_next_line get_next_line_utils
+
+SRCS		=	$(addprefix $(LIBFT_DIR), $(addsuffix .c, $(SRC))) \
+				$(addprefix $(PRINTF_DIR), $(addsuffix .c, $(FT_PRINTFSRC))) \
+				$(addprefix $(GNL_DIR), $(addsuffix .c, $(GNLSRC))) \
+
+OBJS		=	$(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.o)))
+DEPS		=	$(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.d)))
+VPATH		=	$(addprefix $(SRC_DIR), $(SRC_SUBDIRS))
+
+vpath %.c $(VPATH)
+
+DEP_FLAGS	=	-MMD -MF $(DEP_DIR)$*.d
+
 LIBNAME = ft
 LIBPATH = .
 LIBFILE = libft.a
-OBJDIR = object
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-g
+
+CFLAGS = -Wall -Werror -Wextra
+DEP_FLAGS	=	-MMD -MF $(DEP_DIR)$*.d
 RM = /bin/rm -rf
 
-GREEN = "\033[32m"
+DEF_COLOR	=	\033[0;39m
+GREEN		=	\033[0;92m
+YELLOW		=	\033[0;93m
 
-.PHONY: all clean fclean re makedir
+ifeq ($(MODE), debug)
+	CFLAGS += -g
+else ifeq ($(MODE), sanitize)
+	CFLAGS += -g -fsanitize=address
+endif
 
 all: $(NAME)
 
-%.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	
-$(NAME): $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ) 
-	@ar -rsc $(LIBFILE) $(OBJ) $(FT_PRINTF_OBJ) $(GNL_OBJ)
-	@#@mkdir -p $(OBJDIR)
-	@#@mv $(OBJ) $(OBJDIR) 
-	@echo "\033[32m 💎Compilation libft done💎"
+$(NAME): $(OBJS) 
+	@ar -rsc $(LIBFILE) $(OBJS)
+	@echo "\n$(GREEN)💎Compilation libft done$(DEF_COLOR)💎"
+
+$(OBJ_DIR)%.o:	%.c
+				@mkdir -p $(OBJ_DIR)
+				@mkdir -p $(DEP_DIR)
+				@$(CC) $(CFLAGS) $(DEP_FLAGS) -I $(INC_DIR) -c $< -o $@
+				@printf "$(YELLOW).$(DEF_COLOR)"
+
 clean:
-	 @$(RM) $(wildcard $(OBJ))
+	 @$(RM) $(OBJ_DIR) 
 	 @$(RM) $(OBJDIR)
 	 @$(RM) $(wildcard $(FT_PRINTF_OBJ))
 	 @$(RM) $(wildcard $(GNL_OBJ))
-	 @echo "\033[32m 🧹Clean libft done 🧹"
+	 @echo "$(GREEN) 🧹Clean libft done 🧹$(DEF_COLOR)"
+
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFILE)
-	@echo "\033[32m 🧹FClean libft done 🧹"
+	@echo "$(GREEN) 🧹FClean libft done 🧹$(DEF_COLOR)"
 re: fclean all
+
+-include $(DEPS)
+
+.PHONY: all clean fclean re makedir
